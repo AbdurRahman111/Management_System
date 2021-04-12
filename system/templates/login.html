@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Login Page </title>
+<style>
+Body {
+  font-family: Calibri, Helvetica, sans-serif;
+  background-color: #ffdf80;
+}
+button {
+       background-color: #4CAF50;
+       width: 100%;
+        color: orange;
+        padding: 15px;
+        margin: 10px 0px;
+        border: none;
+        cursor: pointer;
+         }
+ form {
+        border: 3px solid #f1f1f1;
+    }
+ input[type=email], input[type=password] {
+        width: 100%;
+        margin: 8px 0;
+        padding: 12px 20px;
+        display: inline-block;
+        border: 2px solid green;
+        box-sizing: border-box;
+    }
+ button:hover {
+        opacity: 0.7;
+    }
+
+
+ .container {
+        padding: 25px;
+        background-color: lightblue;
+    }
+</style>
+</head>
+<body>
+    <center> <h1> Student Login Form </h1> </center>
+    <form  class="" method="post" action='dl'  >
+        {% csrf_token %}
+
+        <div class="container">
+            <label>Email : </label>
+            <input type="email" placeholder="Email" name="email" required>
+            <label>Password : </label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+            <button type="submit">Login</button>
+            <div class="col-12 text-center ">
+               <button> <a href="{% url 'signup_admin' %}"> Admin Signup For Testing </a></button>
+                <p><a href="{% url 'password_reset' %}">Forgotten your password?</a></p>
+        </div>
+        <div class="row">
+          {% if messages %}
+         <div class="col-12">
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+            {% endif %}
+            {% if message.tags == 'success' %}
+            <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+            {% endif %}
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        </div></form>
+</body>
+</html>
+
+

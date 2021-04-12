@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+    input[type=email], input[type=password],input[type=text] {
+        width: 50%;
+        margin: 8px 0;
+        padding: 12px 20px;
+        display: inline-block;
+        border: 2px solid green;
+        box-sizing: border-box;
+    }
+    button {
+       background-color: #4CAF50;
+       width: 10%;
+        color: orange;
+        padding: 15px;
+        margin: 10px 0px;
+        border: none;
+        cursor: pointer;
+         }
+         button:hover {
+        opacity: 0.7;
+    }
+    select {
+     width: 50%;
+        margin: 8px 0;
+        padding: 12px 20px;
+        display: inline-block;
+        border: 2px solid green;
+        box-sizing: border-box;
+         }
+         a {text-decoration: none;} 
+
+</style>
+<body>
+
+<!-- Sidebar -->
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+  <h1 class="w3-bar-item">Admin layout</h1>
+  <div class="info">
+    <a href="#" class="d-block"><b> &nbsp;&nbsp;&nbsp;&nbsp;{{user.username }}</b></a>
+  </div>
+  <a href="/admin_home" class="w3-bar-item w3-button">Home</a>
+  <a href="/add_students" class="w3-bar-item w3-button">Add Students</a>
+  <a href="/see_notification_admin" class="w3-bar-item w3-button">See Notification</a>
+  <a href="/logout_user" class="w3-bar-item w3-button">Logout</a>
+  <a href="/manage_student" class="w3-bar-item w3-button">Manage Students</a>
+  <a href="#" class="w3-bar-item w3-button">See Result </a>
+</div>
+
+
+<!-- Page Content -->
+<div style="margin-left:25%">
+
+
+<div class="w3-container w3-teal">
+  <h1> E-IMTIHAN </h1>
+</div>
+
+<div class="w3-container">
+        <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Add Students</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" action="/add_student_save" method="post">
+                  {% csrf_token %}
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>&nbsp;&nbsp;Email address<br></label>
+                    <input type="email" class="form-control" name="email" placeholder="Enter email">
+                      <input type="hidden" class="form-control" name="admin_id" value="{{user.id}}">
+                  </div>
+                  <div class="form-group">
+                    <label>&nbsp;&nbsp;Password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br></label>
+                    <input type="password" class="form-control" placeholder="Password" name="password">
+                  </div>
+                   <div class="form-group">
+                    <label>&nbsp;&nbsp;First Name&nbsp;&nbsp;&nbsp;<br></label>
+                    <input type="text" class="form-control" placeholder="First Name" name="first_name">
+                  </div>
+                   <div class="form-group">
+                    <label>&nbsp;&nbsp;Last Name&nbsp;&nbsp;&nbsp;<br></label>
+                    <input type="text" class="form-control" placeholder="Last Name" name="last_name">
+                  </div>
+                   <div class="form-group">
+                    <label>&nbsp;&nbsp;Username&nbsp;&nbsp;&nbsp;<br></label>
+                    <input type="text" class="form-control" placeholder="Username" name="username">
+                  </div>
+
+                  <div class="form-group">
+                    <label>&nbsp;&nbsp;Gender &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br></label>
+                      <select class="form-control" name="sex">
+                          <option>Male</option>
+                          <option>Female</option>
+                      </select>
+
+                  </div>
+                  <div class="form-group">
+                    <label>&nbsp;&nbsp;Group &nbsp;&nbsp;&nbsp;<br></label>
+                    <select class="form-control"  name="course">
+                         {% for course in courses %}
+                          <option value="{{ course.id }}">{{ course.course_name }}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                    <div class="form-group">
+                      {% if messages %}
+                        {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                        <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% if message.tags == 'success' %}
+                        <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                        {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                     </div>
+
+
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary btn-block">Add Students</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+
+
+
+          </div>
+          </div>
+      </div>
+    </section>
+
+</div>
+
+</div>
+
+
+
+</body>
+</html>

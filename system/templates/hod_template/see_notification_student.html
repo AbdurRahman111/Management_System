@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<title>E-IMTIHAN Student login</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+  a {text-decoration: none;}
+</style>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+<body>
+<!-- Sidebar -->
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+
+  <h1 class="w3-bar-item">Student panel</h1>
+  <div class="info">
+    <a href="#" class="w3-bar-item w3-button"><b> &nbsp;&nbsp;&nbsp;&nbsp;<h5>{{user.username }}</h5></b></a>
+  </div>
+  <a href="/student_home" class="w3-bar-item w3-button">Home</a>
+  <a href="/student_home" class="w3-bar-item w3-button">Back</a>
+
+  <a href="/logout_user" class="w3-bar-item w3-button">Logout</a>
+
+</div>
+
+
+<!-- Page Content -->
+<div style="margin-left:25%">
+<div class="w3-container w3-teal">
+  <h1> E-IMTIHAN </h1>
+</div>
+
+<div class="w3-container">
+
+
+</div>
+
+
+
+<div class="row">
+
+  <div class="col-md-3"></div>
+
+<div class="card w-50 col-md-4 mt-3 mb-5">
+  {% if get_send_notification %}
+  {% for sn in get_send_notification %}
+
+  <div class="mt-4">
+  <div class="card-header">
+
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p></p>
+
+      <footer class="blockquote-footer"><b>Message :</b> {{sn.message_box | truncatechars:100}} <a href="{% url 'notify_details_student' sn.id %}">read more</a></footer>
+    </blockquote>
+  </div>
+
+  </div>
+{% endfor %}
+{% else %}
+  <div class="row">
+  <div class="col-md-5"></div>
+  <div class="col-md-5"><p> No Notification</p></div>
+  </div>
+
+{% endif %}
+
+</div>
+
+
+
+</div>
+</div>
+
+</body>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
